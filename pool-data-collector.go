@@ -20,6 +20,25 @@ const (
 
 var pool PoolData
 
+/*
+	FIXME: need to make some adjustments to inference of state of heater
+
+	"Cleaner" AKA "Pool pump" is AUX2 (just FYI in case you're using the UI)
+
+	We infer that the heater is ON when:
+	- Pool temp is less than POOL_TEMP_TARGET
+	- "Cleaner" / "Pool pump" is ON
+
+	This is wrong because:
+	- Heater runs when Filter is ON, not tied to "Cleaner" / "Pool pump"
+	- POOL_TEMP_TARGET is hardcoded and is completely wrong for winter
+
+	Looking at the code, that's not actually what we do, but...it's how
+	the graphs react.  So, investigate what's going on.
+
+*/
+
+
 func get_lcd_payload(url string) (payload string, err error) {
 
 	var resp *http.Response
