@@ -16,6 +16,7 @@ const (
 	POOL_TEMP_TARGET = 88
 	NOT_RECORDED     = 0
 	// NOT_RECORDED     = -1
+	version = "0.1"
 )
 
 var pool PoolData
@@ -37,7 +38,6 @@ var pool PoolData
 	the graphs react.  So, investigate what's going on.
 
 */
-
 
 func get_lcd_payload(url string) (payload string, err error) {
 
@@ -91,7 +91,7 @@ func watch_http_endpoint() {
 	}
 }
 
-func update_datastore() {
+func update_datastore( target_temp int ) {
 
 	// Every DATA_UPDATE interval:
 	// 1. Check if our data is stale, zero it out if so
@@ -99,7 +99,7 @@ func update_datastore() {
 
 	for {
 
-		time.Sleep(DATA_UPDATE)	// don't deliver first thing before we have data
+		time.Sleep(DATA_UPDATE) // don't deliver first thing before we have data
 
 		if pool.AirTempF.Last.Before(time.Now().Add(ASSUME_GONE)) {
 			pool.AirTempF.Reading = NOT_RECORDED
@@ -146,7 +146,7 @@ func update_datastore() {
 
 		// Special case: infer state of heater
 
-		if pool.FilterOn.Reading == 1 && pool.PoolTempF.Reading < POOL_TEMP_TARGET {
+		if pool.FilterOn.Reading == 1 && pool.PoolTempF.Reading < target_temp {
 
 			pool.HeaterOn.Reading = 1
 			pool.HeaterOn.Last = time.Now()
@@ -173,6 +173,8 @@ func main() {
 	fmt.Println("pool-data-collector polls a Hayward Aqua Connect Local network device.")
 	fmt.Println("Data is uploaded to a thingsboard/kairosdb instance for graphing.")
 
-	go update_datastore()
+	target_temp := handle_command_line_args()
+
+	go update_datastore( target_temp )
 	watch_http_endpoint()
 }

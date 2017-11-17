@@ -10,30 +10,29 @@ import (
 )
 
 const (
-	KDB_BASE_URL          = "http://bbq.iot.fumanchu.com:8080"
-	KDB_HTTP_TIMEOUT   = 10
+	KDB_BASE_URL     = "http://bbq.iot.fumanchu.com:8080"
+	KDB_HTTP_TIMEOUT = 10
 )
 
 func time_in_milliseconds() int64 {
-    return time.Now().Round(time.Millisecond).UnixNano() / (int64(time.Millisecond)/int64(time.Nanosecond))
+	return time.Now().Round(time.Millisecond).UnixNano() / (int64(time.Millisecond) / int64(time.Nanosecond))
 }
-
 
 func kdb_add_json_element(in, in_name string, in_val int) (out string) {
 
 	// This lead to weird graph tails instead of the gaps I was expecting - try again with kairos/grafana
 
-/*
-	if in_val == NOT_RECORDED {
-		out = in
-		return
-	}
-*/
+	/*
+		if in_val == NOT_RECORDED {
+			out = in
+			return
+		}
+	*/
 
 	tags := "\"tags\": {\"pool_name\": \"Wellington\"}"
 
 	out = in + fmt.Sprintf("{\"name\": \"%s\",\"type\": \"long\",\"timestamp\": \"%d\", \"value\": %d, %s},",
-		in_name, time_in_milliseconds(), in_val, tags )
+		in_name, time_in_milliseconds(), in_val, tags)
 
 	return
 }

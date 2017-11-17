@@ -19,12 +19,12 @@ func add_json_element(in, in_name string, in_val int) (out string) {
 
 	// This lead to weird graph tails instead of the gaps I was expecting
 
-/*
-	if in_val == NOT_RECORDED {
-		out = in
-		return
-	}
-*/
+	/*
+		if in_val == NOT_RECORDED {
+			out = in
+			return
+		}
+	*/
 
 	out = in + "\"" + in_name + "\":" + strconv.Itoa(in_val) + ","
 	return
