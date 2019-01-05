@@ -10,7 +10,8 @@ import (
 )
 
 const (
-	KDB_BASE_URL     = "http://bbq.iot.fumanchu.com:8080"
+//	KDB_BASE_URL     = "http://bbq.iot.fumanchu.com:8080"
+	KDB_BASE_URL     = "http://db:8080"
 	KDB_HTTP_TIMEOUT = 10
 )
 
