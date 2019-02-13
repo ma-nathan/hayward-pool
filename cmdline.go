@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/docopt/docopt-go"
 	"os"
 	"strconv"
-	"github.com/docopt/docopt-go"
 )
 
 func handle_command_line_args() (heater_temp int) {

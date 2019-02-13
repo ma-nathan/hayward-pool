@@ -91,7 +91,7 @@ func watch_http_endpoint() {
 	}
 }
 
-func update_datastore( target_temp int ) {
+func update_datastore(target_temp int) {
 
 	// Every DATA_UPDATE interval:
 	// 1. Check if our data is stale, zero it out if so
@@ -159,10 +159,11 @@ func update_datastore( target_temp int ) {
 			pool.HeaterOn.Reading = NOT_RECORDED
 		}
 
-		// Now deliver this data to the backend - thingsboard?  cassandra?
-		// We can support thingsboard and kairosdb
+		// Now deliver this data to the backend
+		// We can support thingsboard, kairosdb, and influxdb
 
-		deliver_stats_to_kairos()
+		//deliver_stats_to_kairos()
+		deliver_stats_to_influxdb()
 
 	}
 
@@ -171,10 +172,9 @@ func update_datastore( target_temp int ) {
 func main() {
 
 	fmt.Println("pool-data-collector polls a Hayward Aqua Connect Local network device.")
-	fmt.Println("Data is uploaded to a thingsboard/kairosdb instance for graphing.")
 
 	target_temp := handle_command_line_args()
 
-	go update_datastore( target_temp )
+	go update_datastore(target_temp)
 	watch_http_endpoint()
 }
