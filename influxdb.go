@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	database = "scrape"
+	database = "pool"
 	username = "admin"
 	password = "J500icu"
 	db_url   = "http://metrics:8086"
