@@ -66,7 +66,9 @@ func influx_push_metrics(c client.Client ) {
 	if err != nil {
 		log.Fatalln("Error: ", err)
 	}
-	bp.AddPoint(point)
+	if pool.AirTempF.Reading != NOT_RECORDED {
+		bp.AddPoint(point)
+	}
 
 	fields = map[string]interface{}{
 		"pool_temp": pool.PoolTempF.Reading,
@@ -76,7 +78,9 @@ func influx_push_metrics(c client.Client ) {
 	if err != nil {
 		log.Fatalln("Error: ", err)
 	}
-	bp.AddPoint(point)
+	if pool.PoolTempF.Reading != NOT_RECORDED {
+		bp.AddPoint(point)
+	}
 
 	fields = map[string]interface{}{
 		"filter_speed": pool.FilterSpeedRPM.Reading,
@@ -86,7 +90,9 @@ func influx_push_metrics(c client.Client ) {
 	if err != nil {
 		log.Fatalln("Error: ", err)
 	}
-	bp.AddPoint(point)
+	if pool.FilterSpeedRPM.Reading != NOT_RECORDED {
+		bp.AddPoint(point)
+	}
 
 	fields = map[string]interface{}{
 		"salt_ppm": pool.SaltPPM.Reading,
@@ -96,7 +102,9 @@ func influx_push_metrics(c client.Client ) {
 	if err != nil {
 		log.Fatalln("Error: ", err)
 	}
-	bp.AddPoint(point)
+	if pool.SaltPPM.Reading != NOT_RECORDED {
+		bp.AddPoint(point)
+	}
 
 	fields = map[string]interface{}{
 		"filter_on": pool.FilterOn.Reading,
@@ -136,7 +144,9 @@ func influx_push_metrics(c client.Client ) {
 	if err != nil {
 		log.Fatalln("Error: ", err)
 	}
-	bp.AddPoint(point)
+	if pool.ChlorinatorPct.Reading != NOT_RECORDED {
+		bp.AddPoint(point)
+	}
 
 	fields = map[string]interface{}{
 		"heater_on": pool.HeaterOn.Reading,

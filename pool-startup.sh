@@ -2,7 +2,7 @@
 cd "$(dirname "$0")"
 
 # For swim season when the pool is heated:
-#HEATER_TEMP=87
+#HEATER_TEMP=88
 
 # For winter when the heater is not on:
 HEATER_TEMP=40
