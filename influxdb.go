@@ -7,17 +7,6 @@ import (
 	"time"
 )
 
-//const (
-//	database = "pool"
-//	username = "admin"
-//	password = "J500icu"
-//	db_url   = "http://metrics:8086"
-//)
-
-
-//var (
-//	influx_client = influxDBClient(config)
-//)
 
 // CREATE USER admin WITH PASSWORD '$the_usual' WITH ALL PRIVILEGES
 // create database BLAH
