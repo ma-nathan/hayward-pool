@@ -5,17 +5,15 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	"github.com/influxdata/influxdb1-client/v2"
 )
 
 const (
-	DEVICE_HOST      = "pool.fumanchu.com"
 	ASSUME_GONE      = -1 * time.Minute
 	ENDPOINT_PAUSE   = time.Second * 2
 	HTTP_TIMEOUT     = time.Second * 30
 	DATA_UPDATE      = time.Minute * 1
-	POOL_TEMP_TARGET = 88
 	NOT_RECORDED     = 0
-	// NOT_RECORDED     = -1
 	version = "0.1"
 )
 
@@ -66,7 +64,7 @@ func get_lcd_payload(url string) (payload string, err error) {
 	return
 }
 
-func watch_http_endpoint() {
+func watch_http_endpoint(config Config) {
 
 	// Treat the "LCD display" like a serial endpoint over which we have no control on
 	// the sending side.  Keep polling to see what it currently has to say and update
@@ -74,7 +72,7 @@ func watch_http_endpoint() {
 
 	for {
 
-		payload, err := get_lcd_payload("http://" + DEVICE_HOST + "/WNewSt.htm")
+		payload, err := get_lcd_payload("http://" + config.PoolHost + "/WNewSt.htm")
 
 		if err != nil {
 
@@ -91,7 +89,7 @@ func watch_http_endpoint() {
 	}
 }
 
-func update_datastore(target_temp int) {
+func update_datastore(c client.Client, target_temp int, config Config) {
 
 	// Every DATA_UPDATE interval:
 	// 1. Check if our data is stale, zero it out if so
@@ -163,18 +161,9 @@ func update_datastore(target_temp int) {
 		// We can support thingsboard, kairosdb, and influxdb
 
 		//deliver_stats_to_kairos()
-		deliver_stats_to_influxdb()
+		deliver_stats_to_influxdb(c, config)
 
 	}
 
 }
 
-func main() {
-
-	fmt.Println("pool-data-collector polls a Hayward Aqua Connect Local network device.")
-
-	target_temp := handle_command_line_args()
-
-	go update_datastore(target_temp)
-	watch_http_endpoint()
-}
