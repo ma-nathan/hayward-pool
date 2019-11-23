@@ -1,12 +1,11 @@
 package main
 
 import (
-//	"fmt"
+	//	"fmt"
 	"github.com/influxdata/influxdb1-client/v2"
 	"log"
 	"time"
 )
-
 
 // CREATE USER admin WITH PASSWORD '$the_usual' WITH ALL PRIVILEGES
 // create database BLAH
@@ -23,7 +22,7 @@ func influxDBClient(config Config) client.Client {
 	return c
 }
 
-func influx_push_metrics(c client.Client, config Config ) {
+func influx_push_metrics(c client.Client, config Config) {
 	bp, err := client.NewBatchPoints(client.BatchPointsConfig{
 		Database:  config.DatabaseDatabase,
 		Precision: "s",
@@ -156,5 +155,5 @@ func influx_push_metrics(c client.Client, config Config ) {
 
 func deliver_stats_to_influxdb(c client.Client, config Config) {
 
-	influx_push_metrics(c, config )
+	influx_push_metrics(c, config)
 }

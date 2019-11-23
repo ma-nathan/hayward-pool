@@ -2,19 +2,19 @@ package main
 
 import (
 	"fmt"
+	"github.com/influxdata/influxdb1-client/v2"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"github.com/influxdata/influxdb1-client/v2"
 )
 
 const (
-	ASSUME_GONE      = -1 * time.Minute
-	ENDPOINT_PAUSE   = time.Second * 2
-	HTTP_TIMEOUT     = time.Second * 30
-	DATA_UPDATE      = time.Minute * 2
-	NOT_RECORDED     = 0
-	version = "0.1"
+	ASSUME_GONE    = -1 * time.Minute
+	ENDPOINT_PAUSE = time.Second * 2
+	HTTP_TIMEOUT   = time.Second * 30
+	DATA_UPDATE    = time.Minute * 2
+	NOT_RECORDED   = 0
+	version        = "0.1"
 )
 
 var pool PoolData
@@ -76,7 +76,7 @@ func watch_http_endpoint(config Config) {
 	}
 }
 
-func update_datastore(c client.Client, target_temp int, config Config) {
+func update_datastore(c client.Client, config Config) {
 
 	// Every DATA_UPDATE interval:
 	// 1. Check if our data is stale, zero it out if so
@@ -118,6 +118,10 @@ func update_datastore(c client.Client, target_temp int, config Config) {
 			pool.ChlorinatorPct.Reading = NOT_RECORDED
 		}
 
+		if pool.HeaterOn.Last.Before(time.Now().Add(ASSUME_GONE)) {
+			pool.HeaterOn.Reading = NOT_RECORDED
+		}
+
 		/*
 			fmt.Printf("AirTempF: %d\n", pool.AirTempF.Reading)
 			fmt.Printf("PoolTempF: %d\n", pool.PoolTempF.Reading)
@@ -138,4 +142,3 @@ func update_datastore(c client.Client, target_temp int, config Config) {
 	}
 
 }
-

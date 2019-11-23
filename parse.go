@@ -33,7 +33,6 @@ func standardize_whitespace(s string) string {
 // Figure out what data we're dealing with by matching strings
 // This isn't fun but it's all we have to work with
 
-
 func parse_and_update(payload string) {
 
 	var work_str string
@@ -155,17 +154,17 @@ func parse_and_update(payload string) {
 			pool.CleanerOn.Last = time.Now()
 		}
 
-        switch re.FindStringSubmatch(work_str)[INDEX_HEATER] {
+		switch re.FindStringSubmatch(work_str)[INDEX_HEATER] {
 
-        case STR_HEATER_OFF:
+		case STR_HEATER_OFF:
 			report_if_change(pool.HeaterOn.Reading, 0, "Heater")
-            pool.HeaterOn.Reading = 0
-            pool.HeaterOn.Last = time.Now()
-        case STR_HEATER_ON:
+			pool.HeaterOn.Reading = 0
+			pool.HeaterOn.Last = time.Now()
+		case STR_HEATER_ON:
 			report_if_change(pool.HeaterOn.Reading, 1, "Heater")
-            pool.HeaterOn.Reading = 1
-            pool.HeaterOn.Last = time.Now()
-        }
+			pool.HeaterOn.Reading = 1
+			pool.HeaterOn.Last = time.Now()
+		}
 	}
 }
 
@@ -176,9 +175,10 @@ func report_if_change(old, new int, var_name string) {
 		t := time.Now()
 
 		switch new {
-			case 0 : fmt.Printf("%s OFF at %s\n", var_name, t.Format("2006-01-02 15:04:05"))
-			case 1 : fmt.Printf("%s ON at %s\n", var_name, t.Format("2006-01-02 15:04:05"))
+		case 0:
+			fmt.Printf("%s OFF at %s\n", var_name, t.Format("2006-01-02 15:04:05"))
+		case 1:
+			fmt.Printf("%s ON at %s\n", var_name, t.Format("2006-01-02 15:04:05"))
 		}
 	}
 }
-

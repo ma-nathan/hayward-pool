@@ -1,11 +1,10 @@
 package main
 
 import (
-	"os"
-	"log"
 	"github.com/BurntSushi/toml"
+	"log"
+	"os"
 )
-
 
 // $ cat settings.ini
 //
@@ -17,16 +16,15 @@ import (
 //
 
 type Config struct {
-	PoolHost			string
-	PoolTempTarget		int
-	DatabaseURL			string
-	DatabaseUser		string
-	DatabasePassword	string
-	DatabaseDatabase	string
+	PoolHost         string
+	PoolTempTarget   int
+	DatabaseURL      string
+	DatabaseUser     string
+	DatabasePassword string
+	DatabaseDatabase string
 }
 
 var configfile = "settings.ini"
-
 
 func ReadConfig() Config {
 	_, err := os.Stat(configfile)
@@ -41,5 +39,3 @@ func ReadConfig() Config {
 	//log.Print(config.Index)
 	return config
 }
-
-

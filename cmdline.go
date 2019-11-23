@@ -9,7 +9,7 @@ import (
 
 func handle_command_line_args() (heater_temp int) {
 
-	heater_temp = POOL_TEMP_TARGET_INVALID
+	//	heater_temp = POOL_TEMP_TARGET_INVALID
 
 	usage := `
 Usage: pool [--heater_temp=<degrees_f>]
