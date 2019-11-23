@@ -12,7 +12,7 @@ const (
 	ASSUME_GONE      = -1 * time.Minute
 	ENDPOINT_PAUSE   = time.Second * 2
 	HTTP_TIMEOUT     = time.Second * 30
-	DATA_UPDATE      = time.Minute * 1
+	DATA_UPDATE      = time.Minute * 2
 	NOT_RECORDED     = 0
 	version = "0.1"
 )
@@ -20,20 +20,7 @@ const (
 var pool PoolData
 
 /*
-	FIXME: need to make some adjustments to inference of state of heater
-
-	"Cleaner" AKA "Pool pump" is AUX2 (just FYI in case you're using the UI)
-
-	We infer that the heater is ON when:
-	- Pool temp is less than POOL_TEMP_TARGET
-	- "Cleaner" / "Pool pump" is ON
-
-	This is wrong because:
-	- Heater runs when Filter is ON, not tied to "Cleaner" / "Pool pump"
-	- POOL_TEMP_TARGET is hardcoded and is completely wrong for winter
-
-	Looking at the code, that's not actually what we do, but...it's how
-	the graphs react.  So, investigate what's going on.
+	The heater is now wired to the controller 11/22/2019 after 8+ years.
 
 */
 
@@ -141,21 +128,6 @@ func update_datastore(c client.Client, target_temp int, config Config) {
 			fmt.Printf("CleanerOn: %d\n", pool.CleanerOn.Reading)
 			fmt.Printf("LightOn: %d\n", pool.LightOn.Reading)
 		*/
-
-		// Special case: infer state of heater
-
-		if pool.FilterOn.Reading == 1 && pool.PoolTempF.Reading < target_temp {
-
-			pool.HeaterOn.Reading = 1
-			pool.HeaterOn.Last = time.Now()
-		} else {
-
-			pool.HeaterOn.Reading = 0
-		}
-
-		if pool.FilterOn.Last.Before(time.Now().Add(ASSUME_GONE)) {
-			pool.HeaterOn.Reading = NOT_RECORDED
-		}
 
 		// Now deliver this data to the backend
 		// We can support thingsboard, kairosdb, and influxdb
