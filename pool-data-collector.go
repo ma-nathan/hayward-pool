@@ -12,7 +12,7 @@ const (
 	ASSUME_GONE    = -1 * time.Minute
 	ENDPOINT_PAUSE = time.Second * 2
 	HTTP_TIMEOUT   = time.Second * 30
-	DATA_UPDATE    = time.Minute * 2
+	DATA_UPDATE    = time.Minute * 1
 	NOT_RECORDED   = 0
 	version        = "0.1"
 )
