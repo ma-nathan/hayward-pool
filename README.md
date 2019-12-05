@@ -2,7 +2,7 @@
 
 Pool operators with a Hayward Pro Logic or Aqua Plus system can retrieve pool equipment data and store in a variety of time series databases.
 
-## Getting Started
+## Getting Started and Why
 
 There exists an app and cloud storage ecosystem for these pool controllers.  This project is for anyone who wishes to export and use the pool data independently.
 
@@ -28,7 +28,7 @@ make
 ./pool
 ```
 
-## How it works
+### How it works
 
 This is an odd system that seems to span several generations of technology.  The AQL2-BASE-RF at the controller speaks some proprietary 900 MHz RF protocol with the AQ-CO-HOMENET indoors, which presents a Web UI (an and endpoint for the cloud integration) on your LAN.
 
@@ -40,13 +40,15 @@ As far as I was able to ascertain, there exist no APIs or consumer-friendly mean
 
 ### Results
 
+Grafana dashboard available for download at [](https://grafana.com/grafana/dashboards/11354)
+
 ![Example grafana dashboard](http://www.fumanchu.com/pool-dashboard-example.png)
 
 ### Contact
 
 You may reach me at my personal address nb@fumanchu.com and i may be able to help.
 
-## License
+### License
 
 This project is licensed under the MIT License
 
