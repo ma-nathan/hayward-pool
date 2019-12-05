@@ -30,7 +30,7 @@ make
 
 ## How it works
 
-This is an odd system that seems to span several generations of technology.  The AQL2-BASE-RF at the controller speaks some proprietary 900 MHz RF protocol with the AQ-CO-HOMENET indoors, which presents a Web UI (and and endpoint for the cloud integration) on your LAN.
+This is an odd system that seems to span several generations of technology.  The AQL2-BASE-RF at the controller speaks some proprietary 900 MHz RF protocol with the AQ-CO-HOMENET indoors, which presents a Web UI (an and endpoint for the cloud integration) on your LAN.
 
 I was able to "scrape" the Web UI and decypher the status string (up to a point) which to my eyes resembled the output of a serial port interface.
 
@@ -42,4 +42,11 @@ As far as I was able to ascertain, there exist no APIs or consumer-friendly mean
 
 ![Example grafana dashboard](http://www.fumanchu.com/pool-dashboard-example.png)
 
+### Contact
+
+You may reach me at my personal address nb@fumanchu.com and i may be able to help.
+
+## License
+
+This project is licensed under the MIT License
 
