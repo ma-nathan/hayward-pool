@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	BASE_URL          = "http://bbq.iot.fumanchu.com:8080"
-	POOL_DEVICE_TOKEN = "diCFzJhC2pXp1M0rqWnv"
+	BASE_URL          = "http://thingsboard.blah.domain:8080"
+	POOL_DEVICE_TOKEN = "blahblah"
 	TB_HTTP_TIMEOUT   = 10
 )
 
