@@ -30,7 +30,7 @@ make
 
 ### How it works
 
-This is an odd system that seems to span several generations of technology.  The AQL2-BASE-RF at the controller speaks some proprietary 900 MHz RF protocol with the AQ-CO-HOMENET indoors, which presents a Web UI (an and endpoint for the cloud integration) on your LAN.
+This is an odd system that seems to span several generations of technology.  The AQL2-BASE-RF at the controller speaks some proprietary 900 MHz RF protocol with the AQ-CO-HOMENET indoors, which presents a Web UI (and an endpoint for the cloud integration) on your LAN.
 
 I was able to "scrape" the Web UI and decypher the status string (up to a point) which to my eyes resembled the output of a serial port interface.
 
