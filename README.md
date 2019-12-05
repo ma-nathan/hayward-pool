@@ -40,7 +40,7 @@ As far as I was able to ascertain, there exist no APIs or consumer-friendly mean
 
 ### Results
 
-Grafana dashboard available for download at [](https://grafana.com/grafana/dashboards/11354)
+Grafana dashboard available for download at [https://grafana.com/grafana/dashboards/11354](https://grafana.com/grafana/dashboards/11354)
 
 ![Example grafana dashboard](http://www.fumanchu.com/pool-dashboard-example.png)
 
