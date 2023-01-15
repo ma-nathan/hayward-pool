@@ -1,6 +1,9 @@
-VERSION?=0.4.6
+VERSION?=0.4.7
 
 all: build
 build:
-	go build -ldflags "-X main.Version=$(VERSION)" -v .
+	CGO_ENABLED=0 go build -ldflags "-X main.Version=$(VERSION)" -v .
+
+docker:
+	docker build -t pool:0.9 .
 

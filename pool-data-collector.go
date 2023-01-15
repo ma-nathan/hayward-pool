@@ -10,9 +10,9 @@ import (
 
 const (
 	ASSUME_GONE    = -1 * time.Minute
-	ENDPOINT_PAUSE = time.Second * 2
+	ENDPOINT_PAUSE = time.Minute * 2
 	HTTP_TIMEOUT   = time.Second * 30
-	DATA_UPDATE    = time.Minute * 1
+	DATA_UPDATE    = time.Minute * 5
 	NOT_RECORDED   = 0
 	version        = "0.1"
 )
